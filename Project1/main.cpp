@@ -49,7 +49,7 @@ inline void swap(T &x, T &y) {
 int len, n = 1, lim, 
     a_len, b_len, 
     a_point, b_point,
-    a_exp, b_exp;
+    a_exp = 0, b_exp = 0;
 
 bool a_neg = false, b_neg = false;
 
@@ -157,7 +157,7 @@ int main(int argc, char *argv[]) {
         int flag = 0;
         while (num[flag] == 0) ++flag;
         for (register int i = flag; i < a_len; i++)
-            a[a_len - flag - i - 1].real = (double)num[i];
+            a[a_len - i - 1].real = (double)num[i];
 
         // Input of B
         p = argv[2];
@@ -181,7 +181,6 @@ int main(int argc, char *argv[]) {
             ++p;
         }
         if (neg_exp) b_exp *= -1;
-        cout << b_exp << endl;
         if (is_exp == true && b_exp == 0) {
             cout << "The input cannot be interpret as numbers!" << endl;
             return 0;
@@ -196,25 +195,16 @@ int main(int argc, char *argv[]) {
         flag = 0;
         while (num[flag] == 0) ++flag;
         for (register int i = flag; i < b_len; i++)
-            b[b_len - flag - i - 1].real = (double)num[i];
+            b[b_len - i - 1].real = (double)num[i];
     }
-
-    cout << endl;
-	for (int i = 0; i < 10; i++)
-		cout << a[i].real;
-	cout << endl;
-	for (int i = 0; i < 10; i++)
-		cout << b[i].real;
-	cout << endl;
 	 
     multiply();
 
-    // remove prefix zeros
-    int flag = n - 1;
-    while (fabs(a[flag].real) <= 0.50000)
-        flag--;
-
-	cout << flag << endl;
+    // remove prefix and suffix zeros
+    int pre_flag = n - 1;
+    while (fabs(a[pre_flag].real) <= 0.50000) pre_flag--;
+    int suf_flag = 0;
+    while (fabs(a[suf_flag].real) <= 0.50000) suf_flag++;
 
     char *p = argv[1];
     while (*p != '\0') cout << *p++;
@@ -224,18 +214,24 @@ int main(int argc, char *argv[]) {
     cout << " = ";
 
     // if too much digits, use scientific
+    int exp_sum = a_exp + b_exp;
     if (abs(a_exp + b_exp) > 20) {
-        int exp_sum = a_exp + b_exp + (flag);
-        for (register int i = flag; i >= 0; i--) {
+        for (register int i = pre_flag; i >= suf_flag; i--) {
             cout << (int)(a[i].real + 0.5);
-            if (i == flag)
+            if (i == pre_flag)
                 cout << '.';
         }
-        cout << 'e' << exp_sum;
+        if (exp_sum != 0)
+            cout << 'e' << exp_sum;
     }
     else {
-        
-        for (register int i = flag; i >= 0; i--) {
+        // printf("exp_sum: %d, zeros: %d\n", exp_sum, abs(exp_sum) - pre_flag);
+        if (exp_sum < 0 && exp_sum, abs(exp_sum) - pre_flag > 0) {
+            cout << "0.";
+            for (register int i = 1; i < abs(exp_sum) - pre_flag; i++)
+                cout << 0;
+        }
+        for (register int i = pre_flag; i >= suf_flag; i--) {
             cout << (int)(a[i].real + 0.5);
             if (-i == a_exp + b_exp && i != 0)
                 cout << '.';
