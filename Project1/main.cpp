@@ -129,20 +129,22 @@ int main(int argc, char *argv[]) {
                 if (!is_exp) num.push_back(*p - '0');
                 else a_exp = a_exp * 10 + (*p - '0');
             }
-            else if (*p == '.') a_point = num.size();
-            else if (*p == 'e') is_exp = true;
-            else if (*p == '-') {
+            else if (*p == '.' && a_point == -1) a_point = num.size();
+            else if (*p == 'e' && !is_exp) is_exp = true;
+            else if (*p == '-' && (num.size() == 0 || (is_exp && a_exp == 0)))
+            {
                 if (!is_exp) a_neg = true;
                 else neg_exp = true;
             }
             else {
+                cout << "At " << *p << " ";
                 cout << "The input cannot be interpret as numbers!" << endl;
                 return 0;
             }
             ++p;
         }
         if (neg_exp) a_exp *= -1;
-        if (is_exp == true && a_exp == 0) {
+        if (is_exp && a_exp == 0) {
             cout << "The input cannot be interpret as numbers!" << endl;
             return 0;
         }
@@ -168,9 +170,10 @@ int main(int argc, char *argv[]) {
                 if (!is_exp) num.push_back(*p - '0');
                 else b_exp = b_exp * 10 + (*p - '0');
             }
-            else if (*p == '.') b_point = num.size();
-            else if (*p == 'e') is_exp = true;
-            else if (*p == '-') {
+            else if (*p == '.' && b_point == -1) b_point = num.size();
+            else if (*p == 'e' && !is_exp) is_exp = true;
+            else if (*p == '-' && (num.size() == 0 || (is_exp && b_exp == 0)))
+            {
                 if (!is_exp) b_neg = true;
                 else neg_exp = true;
             }
@@ -181,7 +184,7 @@ int main(int argc, char *argv[]) {
             ++p;
         }
         if (neg_exp) b_exp *= -1;
-        if (is_exp == true && b_exp == 0) {
+        if (is_exp && b_exp == 0) {
             cout << "The input cannot be interpret as numbers!" << endl;
             return 0;
         }
@@ -214,11 +217,11 @@ int main(int argc, char *argv[]) {
     cout << " = ";
 
     // if too much digits, use scientific
-    int exp_sum = a_exp + b_exp;
+    int exp_sum = a_exp + b_exp + suf_flag;
     if (abs(a_exp + b_exp) > 20) {
         for (register int i = pre_flag; i >= suf_flag; i--) {
             cout << (int)(a[i].real + 0.5);
-            if (i == pre_flag)
+            if (i == pre_flag && i != suf_flag)
                 cout << '.';
         }
         if (exp_sum != 0)
@@ -226,14 +229,14 @@ int main(int argc, char *argv[]) {
     }
     else {
         // printf("exp_sum: %d, zeros: %d\n", exp_sum, abs(exp_sum) - pre_flag);
-        if (exp_sum < 0 && exp_sum, abs(exp_sum) - pre_flag > 0) {
+        if (exp_sum < 0 && abs(exp_sum) - pre_flag > 0) {
             cout << "0.";
             for (register int i = 1; i < abs(exp_sum) - pre_flag; i++)
                 cout << 0;
         }
         for (register int i = pre_flag; i >= suf_flag; i--) {
             cout << (int)(a[i].real + 0.5);
-            if (-i == a_exp + b_exp && i != 0)
+            if (-i == a_exp + b_exp && i != suf_flag)
                 cout << '.';
         }
         if (a_exp + b_exp > 0)
