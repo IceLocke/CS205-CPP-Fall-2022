@@ -135,11 +135,13 @@ int main(int argc, char *argv[]) {
             }
             else if (*p == '.' && a_point == -1) a_point = num.size();
             else if ((*p == 'e' || *p == 'E') && !is_exp) is_exp = true;
-            else if (*p == '-' && (num.size() == 0 || (is_exp && a_exp == 0)))
+            else if (*p == '-' && ((num.size() == 0 && !a_neg) || (is_exp && a_exp && !neg_exp == 0)))
             {
                 if (!is_exp) a_neg = true;
                 else neg_exp = true;
             }
+            else if (*p == '+' && (num.size() == 0 || (is_exp && a_exp == 0)))
+                continue;
             else {
                 cout << "The input cannot be interpret as numbers!" << endl;
                 return 0;
@@ -175,7 +177,7 @@ int main(int argc, char *argv[]) {
             }
             else if (*p == '.' && b_point == -1) b_point = num.size();
             else if ((*p == 'e' || *p == 'E') && !is_exp) is_exp = true;
-            else if (*p == '-' && (num.size() == 0 || (is_exp && b_exp == 0)))
+            else if (*p == '-' && ((num.size() == 0 && !b_neg) || (is_exp && b_exp && !neg_exp == 0) ))
             {
                 if (!is_exp) b_neg = true;
                 else neg_exp = true;
@@ -225,25 +227,26 @@ int main(int argc, char *argv[]) {
         for (register int i = pre_flag; i >= suf_flag; i--) {
             cout << (int)(a[i].real + 0.5);
             if (i == pre_flag && i != suf_flag)
-                cout << '.';
+                cout << ".";
         }
         if (exp_sum != 0)
             cout << 'e' << exp_sum;
     }
     else {
-        if (exp_sum < 0 && abs(exp_sum) - pre_flag >= 0) {
+        if (exp_sum < 0 && exp_sum + (pre_flag - suf_flag + 1) < 0) {
             cout << "0.";
-            for (register int i = 1; i < abs(exp_sum) - pre_flag; i++)
+            for (register int i = 1; i <=  -exp_sum  - (pre_flag - suf_flag + 1); i++)
                 cout << 0;
         }
         for (register int i = pre_flag; i >= suf_flag; i--) {
             cout << (int)(a[i].real + 0.5);
             if (-i == a_exp + b_exp && i != suf_flag)
-                cout << '.';
+                cout << ".";
         }
-        if (a_exp + b_exp > 0)
-            for (register int i = 1; i <= a_exp + b_exp; i++)
+        if (a_exp + b_exp > 0) {
+            for (register int i = 1; i <= a_exp + b_exp + suf_flag; i++)
                 cout << 0;
+        }
     }
     cout << endl;
     
