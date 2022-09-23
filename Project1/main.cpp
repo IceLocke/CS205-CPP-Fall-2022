@@ -135,13 +135,13 @@ int main(int argc, char *argv[]) {
             }
             else if (*p == '.' && a_point == -1) a_point = num.size();
             else if ((*p == 'e' || *p == 'E') && !is_exp) is_exp = true;
-            else if (*p == '-' && ((num.size() == 0 && !a_neg) || (is_exp && a_exp && !neg_exp == 0)))
+            else if (*p == '-' && ((num.size() == 0 && !a_neg) || (is_exp && a_exp == 0 && !neg_exp == 0)))
             {
                 if (!is_exp) a_neg = true;
                 else neg_exp = true;
             }
             else if (*p == '+' && (num.size() == 0 || (is_exp && a_exp == 0)))
-                continue;
+                ;
             else {
                 cout << "The input cannot be interpret as numbers!" << endl;
                 return 0;
@@ -177,11 +177,13 @@ int main(int argc, char *argv[]) {
             }
             else if (*p == '.' && b_point == -1) b_point = num.size();
             else if ((*p == 'e' || *p == 'E') && !is_exp) is_exp = true;
-            else if (*p == '-' && ((num.size() == 0 && !b_neg) || (is_exp && b_exp && !neg_exp == 0) ))
+            else if (*p == '-' && ((num.size() == 0 && !b_neg) || (is_exp && b_exp == 0 && !neg_exp == 0) ))
             {
                 if (!is_exp) b_neg = true;
                 else neg_exp = true;
             }
+            else if (*p == '+' && (num.size() == 0 || is_exp && b_exp))
+                ;
             else {
                 cout << "The input cannot be interpret as numbers!" << endl;
                 return 0;

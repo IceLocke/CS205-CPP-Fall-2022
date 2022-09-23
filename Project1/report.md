@@ -354,3 +354,5 @@ The input cannot be interpret as numbers!
 [ice@MiWiFi-RA81-srv Project1]$ ./mul 1-1e2 -11-1e3
 The input cannot be interpret as numbers!
 ```
+
+## Part 4 - Difficulties & Solutions
