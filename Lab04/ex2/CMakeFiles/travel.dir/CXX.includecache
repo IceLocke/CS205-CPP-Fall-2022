@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice/CPP/Lab04/ex2/DayFunction.cpp
+DayInfo.hpp
+/home/ice/CPP/Lab04/ex2/DayInfo.hpp
+
+/home/ice/CPP/Lab04/ex2/DayFunction.hpp
+DayInfo.hpp
+/home/ice/CPP/Lab04/ex2/DayInfo.hpp
+
+/home/ice/CPP/Lab04/ex2/DayInfo.hpp
+
+/home/ice/CPP/Lab04/ex2/main.cpp
+iostream
+-
+cstdio
+-
+DayFunction.hpp
+/home/ice/CPP/Lab04/ex2/DayFunction.hpp
+

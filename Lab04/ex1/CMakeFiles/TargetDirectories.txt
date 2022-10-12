@@ -1,0 +1,1 @@
+/home/ice/CPP/Lab04/ex1/CMakeFiles/stuinfo.dir

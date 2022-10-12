@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="cs205-project-1-report">CS205 Project 1 Report</h1>
+<p><strong>Name:</strong> 龚凌琥 (GONG Linghu)<br>
+<strong>SID:</strong> 12110631</p>
+<h2 id="part-1---analysis">Part 1 - Analysis</h2>
+<h3 id="%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%A4%84%E7%90%86">输入输出处理</h3>
+<p>项目的问题是计算多种不同形式输入的两个数的乘积。项目需要判断输入是否合法，因此，首先需要定义一个合法的数的输入。</p>
+<p>定义一个合法的数的输入为：<code>[符号位(+-)]整数部分[.小数部分][e(E)[符号位(+-)]指数部分(整数)]</code>。</p>
+<p>在编写代码时，将指针后移，根据非数位字符确定是否合法即可。</p>
+<p>同时，为了计算方便（同时保证计算精度），把浮点数部分全部转换为整数，例：<code>1.001e100</code> -&gt; <code>1001e97</code>。输出时根据指数部分计算小数点位置即可。在输出较小时，采用小数形式输出，指数部分较大时，采用科学计数法输出。</p>
+<h3 id="%E4%B9%98%E6%B3%95%E8%AE%A1%E7%AE%97">乘法计算</h3>
+<p>计算乘法部分，采用了快速傅里叶变换将多项式系数表示转为点值表示，这样可以以 $O(n\log n)$ 的时间复杂度计算有效位数较多的乘法。</p>
+<p>对于一个 $n$ 位十进制整数，可以用一个多项式 $A(x)$ 表示
+$$
+A(x)=\sum_{i=0}^{n-1}a_ix^i
+$$
+其中 $x=10$。</p>
+<p>然后使用 Cooley-Tukey 算法将该多项式转换为点值表示。该算法基于一种分治思想，可以将离散傅里叶变换和逆离散傅里叶变换的时间复杂度优化到 $O(n\log n)$。</p>
+<p>我们对多项式 $A(x)$ 进行考虑。首先我们把 $A(x)$ 的系数按照下标奇偶性分类
+$$
+\begin{align}
+A(\omega^k_{n})
+&amp;= \sum^{\frac{n}{2} – 1}<em>{i=0}a</em>{2i}(\omega^{k}<em>{n})^{2i} + \sum^{\frac{n}{2}-1}</em>{i=0}a_{2i+1}({\omega^{k}<em>n})^{2i + 1} \
+&amp; = \sum^{\frac{n}{2} – 1}</em>{i=0}a_{2i}(\omega^{k}<em>{n})^{2i} + \omega_n^k\sum^{\frac{n}{2}-1}</em>{i=0}a_{2i+1}({\omega^{k}<em>n})^{2i} \
+&amp; = \sum^{\frac{n}{2} – 1}</em>{i=0}a_{2i}(\omega^{ki}<em>{n})^{2} + \omega_n^k\sum^{\frac{n}{2}-1}</em>{i=0}a_{2i+1}({\omega^{ki}_n})^{2}
+\end{align}
+$$</p>
+<p>当 $k &lt; \frac{n}{2}$ 时，有
+$$
+A_1(\omega^k_n) = \sum_{i=0}^{\frac{n}{2}-1}a_{2i}{\omega_{\frac{n}{2}}^{ki}} + \omega^k_n\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}\omega^{ki}<em>{\frac{n}{2}}
+$$
+当 $k \ge \frac{n}{2}$ 时（在此时，用 $k + \frac{n}{2}$ 代表 $k$ ），有
+$$
+A_2(\omega_n^k) = \sum^{n-1}</em>{i=0}a_{2i}\omega^{ki}<em>{\frac{n}{2}} + \omega^{k + \frac{n}{2}}<em>n\sum</em>{i=0}^{\frac{n}{2}-1}a</em>{2i+1}\omega^{ki}_{\frac{n}{2}}
+$$
+对于 $\omega^{k + \frac{n}{2}}_n$，有
+$$
+\omega^{k + \frac{n}{2}}_n = e^{\frac{2 \pi k \mathbf{i}}{n}} \times e^{\frac{2 \pi \times \frac{n}{2} \mathbf{i}}{n}} = e^{\frac{2 \pi k \mathbf{i}}{n}} \times e^{\pi \mathbf{i}}
+$$</p>
+<p>根据欧拉恒等式 $e^{\pi \mathbf{i}} = -1$，可知
+$$
+\omega^{k+\frac{n}{2}}<em>n = -\omega</em>{n}^{k}
+$$
+因此
+$$
+A_2(\omega_n^k) = \sum^{n-1}<em>{i=0}a</em>{2i}\omega^{ki}<em>{\frac{n}{2}} – \omega^{k}<em>n\sum</em>{i=0}^{\frac{n}{2}-1}a</em>{2i+1}\omega^{ki}_{\frac{n}{2}}
+$$
+这样就可以将带入的 $\omega$ 折半，然后递归分治即可。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// n 是多项式长度扩大到 2^k 长度后的长度</span>
+<span class="hljs-comment">// a 表示传入的多项式的系数, inv 表示代入的单位根是否是倒数</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fft</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, Complex *a, <span class="hljs-keyword">bool</span> inv)</span> </span>{
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">static</span> Complex buf[MAXN];
+    <span class="hljs-keyword">int</span> m = n &gt;&gt; <span class="hljs-number">1</span>;
+    <span class="hljs-comment">// 按照奇偶分类</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) {
+        buf[i] = a[<span class="hljs-number">2</span> * i];
+        buf[i + m] = a[<span class="hljs-number">2</span> * i + <span class="hljs-number">1</span>];
+    }
+    <span class="hljs-comment">// 递归运算</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        a[i] = buf[i];
+    fft(m, a, inv);
+    fft(m, a + m, inv);
+    <span class="hljs-comment">// 计算 DFT(A(x))</span>
+    Complex w = Complex(<span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>), 
+            wn = Complex(<span class="hljs-built_in">cos</span>(<span class="hljs-number">2</span> * PI / n), <span class="hljs-built_in">sin</span>(<span class="hljs-number">2</span> * PI / n));
+    <span class="hljs-keyword">if</span> (inv) wn = getConj(wn);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) {
+        buf[i] = a[i] + w * a[i + m];
+        buf[i + m] = a[i] - w * a[i + m];
+        w = w * wn;
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        a[i] = buf[i];
+}
+</div></code></pre>
+<p>递归实现的FFT运行速度较慢，我们考虑一下采用迭代方式实现。先考虑一下递归树。对于一个 $n=8$ 时递归树最后一层，把每个数原始下标的二进制表示和在最底层数组的下标的二进制列出来：</p>
+<ul>
+<li>$a_0(000) ;;000 $</li>
+<li>$a_4(100) ;; 001$</li>
+<li>$a_2(010) ;; 010$</li>
+<li>$a_6(110) ;; 011$</li>
+<li>$a_1(001) ;; 100$</li>
+<li>$a_5(101) ;; 101$</li>
+<li>$a_3(011) ;; 110$</li>
+<li>$a_7(111) ;; 111$</li>
+</ul>
+<p><input type="checkbox" id="checkbox0" checked="true"><label for="checkbox0">= a'[rev[x]]$。这样我们就找到了最低层下标的对应规律，可以考虑迭代进行 FFT 了。用蝴蝶操作将重复的表达式 $\omega \times a[i+m]$ 提取出来，就可以不使用 </label><code>buf</code> 数组，在 <code>a</code> 中直接计算进行，具体的代码如下</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) {
+    R Complex t = w * a[i + m];
+    a[i + m] = a[i] - t;
+    a[i] = a[i] + t;
+    w = w * wn;
+}
+</div></code></pre>
+<p>接着，只需要自底向上对 FFT 的过程进行追踪，即可写出迭代的 FFT，具体代码见第二部分。</p>
+<h2 id="part2---code">Part2 - Code</h2>
+<p><strong>包含关键部分代码。</strong></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// source.cpp</span>
+<span class="hljs-comment">// ...</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fft</span><span class="hljs-params">(Complex *a, <span class="hljs-keyword">bool</span> inv)</span> </span>{
+    lim = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> ((<span class="hljs-number">1</span> &lt;&lt; lim) &lt; n)
+        lim++;
+    
+    <span class="hljs-comment">// 蝴蝶变换，自底向上处理</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        <span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> t = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; lim; j++)
+            <span class="hljs-keyword">if</span> ((i &gt;&gt; j) &amp; <span class="hljs-number">1</span>)
+                t |= (<span class="hljs-number">1</span> &lt;&lt; (lim - j - <span class="hljs-number">1</span>));
+        <span class="hljs-keyword">if</span> (i &lt; t)
+            swap(a[i], a[t]);
+    }
+    
+    <span class="hljs-comment">// 迭代处理</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> l = <span class="hljs-number">2</span>; l &lt;= n; l &lt;&lt;= <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">int</span> m = l &gt;&gt; <span class="hljs-number">1</span>;
+        <span class="hljs-function">Complex <span class="hljs-title">wn</span><span class="hljs-params">(<span class="hljs-built_in">cos</span>(<span class="hljs-number">2</span> * PI / l), <span class="hljs-built_in">sin</span>(<span class="hljs-number">2</span> * PI / l))</span></span>;
+        <span class="hljs-keyword">if</span> (inv)
+            wn = wn.getConj();
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> Complex *p = a; p != a + n; p += l) {
+            <span class="hljs-function"><span class="hljs-keyword">register</span> Complex <span class="hljs-title">w</span><span class="hljs-params">(<span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>)</span></span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) {
+                <span class="hljs-keyword">register</span> Complex t = w * p[i + m];
+                p[i + m] = p[i] - t;
+                p[i] = p[i] + t;
+                w = w * wn;
+            }
+        }
+    } 
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">multiply</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">while</span> (n &lt; a_len + b_len)
+        n &lt;&lt;= <span class="hljs-number">1</span>;
+    
+    fft(a, <span class="hljs-number">0</span>);
+    fft(b, <span class="hljs-number">0</span>);
+    
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        a[i] = a[i] * b[i];
+        
+    fft(a, <span class="hljs-number">1</span>);
+    
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)
+        a[i].real = a[i].real / (<span class="hljs-keyword">double</span>)n;
+    
+    <span class="hljs-comment">// 将大于9的多项式系数前移</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) {
+        <span class="hljs-keyword">if</span>(!(a[i].real &lt;= <span class="hljs-number">9</span>)) {
+            a[i + <span class="hljs-number">1</span>].real += (<span class="hljs-keyword">int</span>)(a[i].real + <span class="hljs-number">0.5</span>) / <span class="hljs-number">10</span>;
+            a[i].real = a[i].real - ((<span class="hljs-keyword">int</span>)(a[i].real + <span class="hljs-number">0.5</span>) / <span class="hljs-number">10</span>) * <span class="hljs-number">10</span>;   
+        }
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span> </span>{
+    <span class="hljs-keyword">if</span> (argc != <span class="hljs-number">3</span>) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Invalid input length!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; num;
+
+        a_len = <span class="hljs-number">0</span>, b_len = <span class="hljs-number">0</span>;
+        a_exp = <span class="hljs-number">0</span>, b_exp = <span class="hljs-number">0</span>;
+        a_point = <span class="hljs-number">-1</span>, b_point = <span class="hljs-number">-1</span>;
+
+        <span class="hljs-comment">// A的输入部分，需要在多处检查输入合法性</span>
+        <span class="hljs-keyword">char</span> *p = argv[<span class="hljs-number">1</span>];
+        <span class="hljs-keyword">bool</span> is_exp = <span class="hljs-literal">false</span>, neg_exp = <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">while</span> (*p != <span class="hljs-string">'\0'</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isdigit</span>(*p)) {
+                <span class="hljs-keyword">if</span> (!is_exp) num.push_back(*p - <span class="hljs-string">'0'</span>);
+                <span class="hljs-keyword">else</span> a_exp = a_exp * <span class="hljs-number">10</span> + (*p - <span class="hljs-string">'0'</span>);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*p == <span class="hljs-string">'.'</span> &amp;&amp; a_point == <span class="hljs-number">-1</span>) a_point = num.size();
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*p == <span class="hljs-string">'e'</span> || *p == <span class="hljs-string">'E'</span>) &amp;&amp; !is_exp) is_exp = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*p == <span class="hljs-string">'-'</span> &amp;&amp; (num.size() == <span class="hljs-number">0</span> || (is_exp &amp;&amp; a_exp == <span class="hljs-number">0</span>)))
+            {
+                <span class="hljs-keyword">if</span> (!is_exp) a_neg = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">else</span> neg_exp = <span class="hljs-literal">true</span>;
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*p == <span class="hljs-string">'+'</span> &amp;&amp; (num.size() == <span class="hljs-number">0</span> || (is_exp &amp;&amp; a_exp == <span class="hljs-number">0</span>)))
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The input cannot be interpret as numbers!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            ++p;
+        }
+        <span class="hljs-keyword">if</span> (neg_exp) a_exp *= <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">if</span> (is_exp &amp;&amp; a_exp == <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The input cannot be interpret as numbers!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        }
+
+        <span class="hljs-comment">// 将小数全部转为整数+指数的形势</span>
+        <span class="hljs-keyword">if</span> (a_point == <span class="hljs-number">-1</span>)
+            a_point = num.size();
+        a_len = num.size();
+        a_exp += a_point - a_len;
+
+        <span class="hljs-comment">// 倒序存储，便于FFT计算</span>
+        <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (num[flag] == <span class="hljs-number">0</span>) ++flag;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = flag; i &lt; a_len; i++)
+            a[a_len - i - <span class="hljs-number">1</span>].real = (<span class="hljs-keyword">double</span>)num[i];
+
+        <span class="hljs-comment">// B的输入部分，同上</span>
+        p = argv[<span class="hljs-number">2</span>];
+        is_exp = <span class="hljs-literal">false</span>, neg_exp = <span class="hljs-literal">false</span>;
+        num.clear();
+        <span class="hljs-keyword">while</span> (*p != <span class="hljs-string">'\0'</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isdigit</span>(*p)) {
+                <span class="hljs-keyword">if</span> (!is_exp) num.push_back(*p - <span class="hljs-string">'0'</span>);
+                <span class="hljs-keyword">else</span> b_exp = b_exp * <span class="hljs-number">10</span> + (*p - <span class="hljs-string">'0'</span>);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*p == <span class="hljs-string">'.'</span> &amp;&amp; b_point == <span class="hljs-number">-1</span>) b_point = num.size();
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*p == <span class="hljs-string">'e'</span> || *p == <span class="hljs-string">'E'</span>) &amp;&amp; !is_exp) is_exp = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*p == <span class="hljs-string">'-'</span> &amp;&amp; (num.size() == <span class="hljs-number">0</span> || (is_exp &amp;&amp; b_exp == <span class="hljs-number">0</span>)))
+            {
+                <span class="hljs-keyword">if</span> (!is_exp) b_neg = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">else</span> neg_exp = <span class="hljs-literal">true</span>;
+            }
+            <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The input cannot be interpret as numbers!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            ++p;
+        }
+        <span class="hljs-keyword">if</span> (neg_exp) b_exp *= <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">if</span> (is_exp &amp;&amp; b_exp == <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"The input cannot be interpret as numbers!"</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">if</span> (b_point == <span class="hljs-number">-1</span>)
+            b_point = num.size();
+        b_len = num.size();
+        b_exp += b_point - b_len;
+
+        flag = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (num[flag] == <span class="hljs-number">0</span>) ++flag;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = flag; i &lt; b_len; i++)
+            b[b_len - i - <span class="hljs-number">1</span>].real = (<span class="hljs-keyword">double</span>)num[i];
+    }
+	 
+    multiply();
+
+    <span class="hljs-comment">// 删除前缀和后缀0</span>
+    <span class="hljs-keyword">int</span> pre_flag = n - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">fabs</span>(a[pre_flag].real) &lt;= <span class="hljs-number">0.50000</span>) pre_flag--;
+    <span class="hljs-keyword">int</span> suf_flag = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">fabs</span>(a[suf_flag].real) &lt;= <span class="hljs-number">0.50000</span>) suf_flag++;
+
+    <span class="hljs-keyword">char</span> *p = argv[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">while</span> (*p != <span class="hljs-string">'\0'</span>) <span class="hljs-built_in">cout</span> &lt;&lt; *p++;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">" * "</span>;
+    p = argv[<span class="hljs-number">2</span>];
+    <span class="hljs-keyword">while</span> (*p != <span class="hljs-string">'\0'</span>) <span class="hljs-built_in">cout</span> &lt;&lt; *p++;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">" = "</span>;
+
+    <span class="hljs-keyword">if</span> (a_neg ^ b_neg) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">'-'</span>;
+
+    <span class="hljs-comment">// 判断有效位数，如果过多采用科学计数法</span>
+    <span class="hljs-keyword">int</span> exp_sum = a_exp + b_exp + suf_flag;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(exp_sum) &gt; <span class="hljs-number">20</span> || (pre_flag - suf_flag) &gt; <span class="hljs-number">20</span>) {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = pre_flag; i &gt;= suf_flag; i--) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">int</span>)(a[i].real + <span class="hljs-number">0.5</span>);
+            <span class="hljs-keyword">if</span> (i == pre_flag &amp;&amp; i != suf_flag)
+                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"."</span>;
+        }
+        <span class="hljs-keyword">if</span> (exp_sum != <span class="hljs-number">0</span>)
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">'e'</span> &lt;&lt; exp_sum;
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (exp_sum &lt; <span class="hljs-number">0</span> &amp;&amp; exp_sum + (pre_flag - suf_flag + <span class="hljs-number">1</span>) &lt; <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"0."</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;=  -exp_sum  - (pre_flag - suf_flag + <span class="hljs-number">1</span>); i++)
+                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = pre_flag; i &gt;= suf_flag; i--) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">int</span>)(a[i].real + <span class="hljs-number">0.5</span>);
+            <span class="hljs-keyword">if</span> (-i == a_exp + b_exp &amp;&amp; i != suf_flag)
+                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"."</span>;
+        }
+        <span class="hljs-keyword">if</span> (a_exp + b_exp &gt; <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= a_exp + b_exp; i++)
+                <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h2 id="part-3---result--verification">Part 3 - Result &amp; Verification</h2>
+<h3 id="test-case-1">Test Case 1</h3>
+<pre class="hljs"><code><div>[ice@MiWiFi-RA81-srv Project1]$ ./mul 2 3
+2 * 3 = 6
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 3.1416 2
+3.1416 * 2 = 6.2832
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 3.1415 2.0e-2
+3.1415 * 2.0e-2 = 0.06283
+[ice@MiWiFi-RA81-srv Project1]$ ./mul a  2
+The input cannot be interpret as numbers!
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 1234567890
+Invalid input length!
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 1234567890 1234567890
+1234567890 * 1234567890 = 15241578750190521
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 1.0e200 1.0e200
+1.0e200 * 1.0e200 = 1e400
+[ice@MiWiFi-RA81-srv Project1]$ 
+</div></code></pre>
+<h3 id="test-case-2">Test Case 2</h3>
+<pre class="hljs"><code><div>[ice@MiWiFi-RA81-srv Project1]$ ./mul 1e-2 222e222
+1e-2 * 222e222 = 2.22e220
+[ice@MiWiFi-RA81-srv Project1]$ ./mul -2123 2e1
+-2123 * 2e1 = -42460
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 0213eeee1 -1e1
+The input cannot be interpret as numbers!
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 821.33 --2123e1
+The input cannot be interpret as numbers!
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 21783.3e--2 3.3
+21783.3e--2 * 3.3 = 718.8489
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 821.33 --2123e1
+The input cannot be interpret as numbers!
+[ice@MiWiFi-RA81-srv Project1]$ ./mul 1-1e2 -11-1e3
+The input cannot be interpret as numbers!
+</div></code></pre>
+<h2 id="part-4---difficulties--solutions">Part 4 - Difficulties &amp; Solutions</h2>
+<h3 id="%E5%A4%84%E7%90%86%E5%B0%8F%E6%95%B0">处理小数</h3>
+<p>开始时考虑使用浮点数对小数部分进行处理，后来发现有效数字位数一多，会有精度损失。考虑将一个数表示为 <code>[整数部分]E[指数部分]</code>，再进行计算，即可保证计算精度。以小数形式输出时只需要结合前导0和后缀0的信息计算小数点位置和前导0的数量即可。</p>
+<h3 id="%E8%BE%93%E5%85%A5%E5%A4%84%E7%90%86">输入处理</h3>
+<p>主要的困难在于处理相对原始的字符串输入，需要判断各种可能出现的情况。如果能够使用正则表达式匹配有效输入 <code>[符号位(+-)]整数部分[.小数部分][e(E)[符号位(+-)]指数部分(整数)]</code> ，程序将会比较容易编写。</p>
+
+</body>
+</html>

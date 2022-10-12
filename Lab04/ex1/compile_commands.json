@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/ice/CPP/Lab04/ex1",
+  "command": "/usr/bin/g++    -g   -o CMakeFiles/stuinfo.dir/main.cpp.o -c /home/ice/CPP/Lab04/ex1/main.cpp",
+  "file": "/home/ice/CPP/Lab04/ex1/main.cpp"
+},
+{
+  "directory": "/home/ice/CPP/Lab04/ex1",
+  "command": "/usr/bin/g++    -g   -o CMakeFiles/stuinfo.dir/stufun.cpp.o -c /home/ice/CPP/Lab04/ex1/stufun.cpp",
+  "file": "/home/ice/CPP/Lab04/ex1/stufun.cpp"
+}
+]
