@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/Lab04/ex1"
+    "cmake.sourceDirectory": "${workspaceFolder}/Lab04/ex1",
+    "C_Cpp.errorSquiggles": "Disabled"
 }

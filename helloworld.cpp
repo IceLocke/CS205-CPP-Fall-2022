@@ -2,11 +2,12 @@
 using namespace std;
 
 int main() {
+int * pint = (int*) malloc(8*sizeof(int));
 
-    auto val = 2 / 3;
+char * pc = (char*) pint;
 
-    val = 3.14 * 2;
+pc[8]='a';
 
-    cout << val << endl;
+*(pc+8)='b';
 
 }

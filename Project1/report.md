@@ -1,6 +1,4 @@
 # CS205 Project 1 Report
-**Name:** 龚凌琥 (GONG Linghu)  
-**SID:** 12110631
 
 ## Part 1 - Analysis
 
