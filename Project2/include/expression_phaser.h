@@ -31,16 +31,19 @@ struct ExpressionPhaser {
         HIGH = 3
     };
 
+    ExpressionPhaser(map<string, number> *vari, map<string, function<number(number)>> *func);
+
     stack<string> operators;
     stack<number> nums;
     vector<string> strings;
     vector<StringType> string_types;
-    map<string, expression> &var;
-    map<string, function<number(number)>> &functions;
+    map<string, number> *var;
+    map<string, function<number(number)>> *functions;
 
     void divide_string(expression e);
     bool is_equation(expression e);
+    bool is_function(string func);
     void calculate_top(bool is_function);
     OperatorPriority operator_priority(char ch);
-    number caculate_expression(expression e, map<string, expression> &variables);
+    number calculate_expression(expression e);
 };

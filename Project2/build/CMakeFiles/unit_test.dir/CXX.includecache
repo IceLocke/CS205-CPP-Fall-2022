@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice/CPP/Project2/include/number.h
+string
+-
+
+/home/ice/CPP/Project2/src/number.cpp
+../include/number.h
+/home/ice/CPP/Project2/include/number.h
+cmath
+-
+string
+-
+cstring
+-
+string.h
+-
+
+/home/ice/CPP/Project2/unit_test.cpp
+src/number.cpp
+/home/ice/CPP/Project2/src/number.cpp
+iostream
+-
+string
+-
+cstring
+-
+
