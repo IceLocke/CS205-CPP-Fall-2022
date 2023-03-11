@@ -1,6 +1,6 @@
 // Copyright 2022 Gong Linghu
 // License(MIT)
-// Author: Gong Linghu
+// Author: IceLocke
 // A simple calculater which can multiply two numbers. Implement by FFT.
 
 #include <iostream>

@@ -1,9 +1,5 @@
 # CS205 2022 Fall Project 2 Report
 
-**Name:** 龚凌琥 (GONG Linghu)
-
-**SID:** 12110631
-
 本项目使用 GitHub 进行代码管理，项目地址：[https://github.com/IceLocke/2022-Fall-CPP-Project2](https://github.com/IceLocke/2022-Fall-CPP-Project2)
 
 ## Part 1 - Analysis

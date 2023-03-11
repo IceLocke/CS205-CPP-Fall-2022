@@ -34,7 +34,15 @@
         "type_traits": "cpp",
         "tuple": "cpp",
         "typeinfo": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "stdio.h": "c",
+        "math.h": "c",
+        "cerrno": "c",
+        "map": "c",
+        "ios": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "matrix.h": "c"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "cmake.configureOnOpen": true

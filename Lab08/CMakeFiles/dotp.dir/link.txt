@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/dotp.dir/main.cpp.o CMakeFiles/dotp.dir/matoperation.cpp.o  -o dotp -rdynamic 
